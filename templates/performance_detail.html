@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2 id="about-title" class="text-center mb-3">{{ performance.artist_name }}</h2>
+  <div class="card">
+    <figure class="performance-img-wrapper">
+      <img src="{{ url_for('static', filename=performance.image_path) }}" class="performance-img"
+        alt="{{ performance.artist_name }}" loading="lazy">
+    </figure>
+    <article class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="card-text">
+            <strong>Data:</strong> {{ performance.performance_day }} - {{ performance.start_time }}<br>
+            <strong>Durata:</strong> {{ performance.duration }} minuti
+          </p>
+        </div>
+        <div class="col-md-6">
+          <p class="card-text">
+            <strong>Palco:</strong> {{ performance.stage }}<br>
+            <strong>Genere:</strong> {{ performance.genre }}
+          </p>
+        </div>
+      </div>
+      <p class="card-text">{{ performance.description }}</p>
+
+      <!-- bottoni per partecipanti e organizzatori -->
+
+      {% if not (current_user.is_authenticated and current_user.role == "organizzatore") %}
+      <div class="text-center mt-3">
+        <a href="{{ url_for('buy_ticket') }}" class="btn btn-success btn-lg">Acquista Biglietto</a>
+      </div>
+      {% endif %}
+
+      {% if current_user.is_authenticated and current_user.role == "organizzatore" and performance.published == 0 %}
+      <a href="{{ url_for('publish_performance_route', performance_id=performance.id) }}"
+        class="btn btn-sm btn-outline-primary">Pubblica</a>
+      <a href="{{ url_for('edit_performance', performance_id=performance.id) }}" class="btn btn-primary">Modifica
+        Performance</a>
+      <a href="{{ url_for('delete_performance_route', performance_id=performance.id) }}"
+        class="btn btn-sm btn-danger">Elimina</a>
+      {% endif %}
+
+
+    </article>
+  </div>
+</div>
+{% endblock %}

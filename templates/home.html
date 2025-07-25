@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  {% if not (current_user.is_authenticated and current_user.role == "organizzatore") %}
+  <aside id="promo-section" class="text-center mb-3">
+    <div class="promo-box">
+      <h4>20-21-22 GIUGNO</h4>
+      <p>Acquista il tuo biglietto ora e assicurati il posto per tutte le performance!</p>
+      <a href="{{ url_for('buy_ticket') }}" class="btn promo-btn">Acquista Biglietto</a>
+    </div>
+  </aside>
+
+  {% endif %}
+
+  <div id="filters-container" class="mb-3">
+    <h3 class="text-center mb-1">Programma delle Performance</h3>
+    
+    <!-- Form per i filtri -->
+    <form id="filters-form" method="GET" action="{{ url_for('home') }}" class="form-inline justify-content-center">
+      <div class="form-group mr-2">
+        <label for="day" class="mr-2">Giorno:</label>
+        <select name="day" id="day" class="form-control">
+          <option value="">Tutti</option>
+          {% for d in days %}
+          <option value="{{ d|lower }}" {% if request.args.get('day')==d|lower %}selected{% endif %}>{{ d }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group mr-2">
+        <label for="stage" class="mr-2">Palco:</label>
+        <select name="stage" id="stage" class="form-control">
+          <option value="">Tutti</option>
+          {% for s in stages %}
+          <option value="{{ s }}" {% if request.args.get('stage')==s %}selected{% endif %}>{{ s }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group mr-2">
+        <label for="genre" class="mr-2">Genere:</label>
+        <select name="genre" id="genre" class="form-control">
+          <option value="">Tutti</option>
+          {% for g in genres %}
+          <option value="{{ g }}" {% if request.args.get('genre')==g %}selected{% endif %}>{{ g }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Filtra</button>
+      <a href="{{ url_for('home') }}" class="btn btn-secondary">Reset Filtri</a>
+    </form>
+  </div>
+
+  <!-- performance -->
+  <article class="row">
+    {% for perf in performances %}
+    <div class="col-md-4 mb-3">
+      <a href="{{ url_for('performance_detail', performance_id=perf.id) }}" class="card-link">
+        <div class="card performance-card">
+          <img src="{{ url_for('static', filename=perf.image_path) }}" class="card-img-top"
+            alt="{{ perf.artist_name }}">
+          <div class="card-body">
+            <h5 class="card-title">
+              {{ perf.artist_name }}
+              {% if current_user.is_authenticated and current_user.role == "organizzatore" and perf.published == 0 %}
+              <span class="badge badge-warning">Bozza</span>
+              {% endif %}
+            </h5>
+            <p class="card-text">
+              {{ perf.performance_day }} - {{ perf.start_time }}<br>
+              Palco: {{ perf.stage }}<br>
+              Genere: {{ perf.genre }}
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% else %}
+    <div class="col-12">
+      <p id="filter-no-result" class="text-center">Nessuna performance trovata con questi filtri.</p>
+    </div>
+    {% endfor %}
+  </article>
+</div>
+{% endblock %}

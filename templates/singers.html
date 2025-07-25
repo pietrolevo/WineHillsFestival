@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h3 id="about-title" class="text-center mb-3">Artisti del WineHills Festival</h3>
+
+  <article class="row">
+    {% for perf in performances %}
+    <main class="col-md-3 mb-3">
+      <a href="{{ url_for('performance_detail', performance_id=perf.id) }}" class="card-link">
+        <div class="card performance-card">
+          <img src="{{ url_for('static', filename=perf.image_path) }}" class="card-img-top" alt="{{ perf.artist_name }}"
+            loading="lazy">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ perf.artist_name }}</h5>
+          </div>
+        </div>
+      </a>
+    </main>
+    {% else %}
+    <div class="col-12">
+      <p class="text-center">Nessun artista trovato.</p>
+    </div>
+    {% endfor %}
+  </article>
+</div>
+{% endblock %}

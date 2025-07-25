@@ -1,0 +1,86 @@
+Autore: Pietro Alberto Levo    id: s311516
+
+L'applicazione web è disponibile su pythonAnywhere al seguente link:
+https://pietros.pythonanywhere.com/
+
+COSA HO USATO:
+  HTML5
+  CSS
+  Bootstrap (si veda base.html)
+    - https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css
+      - DIPENDENZE BOOTSTRAP
+        - https://code.jquery.com/jquery-3.5.1.slim.min.js
+        - https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js
+        - https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js
+  flask
+  SQLite
+  flask-login
+  werkzeug
+  pillow
+
+CARTELLE:
+  db: contiene il database SQLite e il file python che ho usato per crearlo
+  static: contiene il css e le immagini usate dal sito(comprese performance caricate)
+  templates: contiene tutti i file html
+
+ISTRUZIONI PER PROVARE IL SITO:
+Sono stati inseriti già i seguenti utenti
+
+ORGANIZZATORI: 
+  pietrolevo@gmail.com    organizza1!
+  jeffbezos@gmail.com     organizza2!
+
+PARTECIPANTI CON BIGLIETTO:
+  gandalf@gmail.com       partecipa1!     Biglietto già comprato: Giornaliero Domenica
+  johnsnow@gmail.com      partecipa2!     Biglietto già comprato: Pass 2 giorni Venerdì-Sabato
+  keanureeves@gmail.com   partecipa3!     Biglietto già comprato: Full pass
+
+PARTECIPANTI SENZA BIGLIETTO:
+  jeremywade@gmail.com    partecipa4!
+
+Sono inoltre presenti 18 cantanti di cui 3 salvati solo come bozze.
+-Si noti che la bozza di "Shawn Mendes" dovrebbe creare un conflitto di orario e palco se approvata la bozza, restituendo messaggio flash di errore.
+-La bozza "Camila Cabello" non presenterà errori perché è permesso che canti su un palco durante la pausa. Il palco tra l'altro rimane libero fino a fine giornata (si veda scaletta)
+-La bozza "Maroon5" invece verrà bloccata perché inizierebbe si durante la pausa ma finirebbe dopo inizio performance successiva già approvata sullo stesso palco
+
+Ovviamente possono anche essere aggiunte performance di artisti a vostro piacere o modificate bozze presenti.
+Per iscriversi come organizzatore bisogna inserire il codice DIRECTOR123
+
+STAGES:
+  1-Barbera
+  2-Dolcetto
+  3-Brachetto
+
+SCALETTA CANTANTI (ora, stage, cantante):
+-Venerdì
+16.00   Brachetto   2Cellos
+17.30		Dolcetto    U2
+19.00   Dolcetto    Jovanotti
+20.30   --pausa------------------------
+21.30   Barbera     Eminem
+23.00   Barbera     Rihanna
+
+*Bozza
+16.30   Brachetto   Shawn Mendes  // verrà bloccato per conflitto di palco e ora
+
+-Sabato
+16.00   Brachetto   Alvaro Soler
+17.30		Dolcetto    Post Malone
+19.00   Dolcetto    Dua Lipa
+20.30   --pausa------------------------
+21.30   Barbera     Taylor Swift
+23.00   Barbera     Pitbull feat. Ke$ha
+
+*Bozza 
+20.45   Brachetto   Camila Cabello  // non verrà bloccata   
+
+-Domenica
+16.00   Brachetto   Andrea Bocelli
+17.30		Dolcetto    Ed Sheeran
+19.00   Dolcetto    Mika
+20.30   --pausa------------------------
+21.30   Barbera     Lady Gaga
+23.00   Barbera     Coldplay
+
+*Bozza
+20.50-21.50   Barbera   Maroon5   // verranno bloccati

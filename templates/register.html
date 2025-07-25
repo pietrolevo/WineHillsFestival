@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center mt-4">
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-header bg-primary text-white text-center">
+        <h2 class="mb-0">Registrazione</h2>
+      </div>
+      <article class="card-body">
+        <form method="POST" action="{{ url_for('register') }}">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Inserisci la tua email"
+              required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password"
+              placeholder="Inserisci la tua password" required
+              pattern="^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$"
+              title="La password deve contenere 10 o più caratteri di cui almeno un numero e un carattere speciale.">
+          </div>
+          <div class="form-group">
+            <label for="confirm_password">Ripeti Password</label>
+            <input type="password" class="form-control" id="confirm_password" name="confirm_password"
+              placeholder="Ripeti la tua password" required>
+          </div>
+          <div class="form-group">
+            <label for="role">Ruolo</label>
+            <select class="form-control" id="role" name="role" required>
+              <option value="partecipante">Partecipante</option>
+              <option value="organizzatore">Organizzatore</option>
+            </select>
+          </div>
+          <div class="form-group" id="organizer-code-field">
+            <label for="organizer_code">Codice Organizzatore</label>
+            <input type="text" class="form-control" id="organizer_code" name="organizer_code"
+              placeholder="Inserisci il codice organizzatore">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Registrati</button>
+        </form>
+        <p class="mt-3 text-center">
+          Hai già un account? <a href="{{ url_for('login') }}">Login</a>
+        </p>
+      </article>
+    </div>
+  </div>
+</div>
+{% endblock %}

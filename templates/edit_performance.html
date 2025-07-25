@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center mt-4">
+  <div class="col-md-8">
+    <article class="card shadow-sm">
+      <div class="card-header bg-primary text-white text-center">
+        <h2 class="mb-0">Modifica Performance</h2>
+      </div>
+      <main class="card-body">
+        
+        <!-- forms per editare-->
+        <form method="POST" action="{{ url_for('edit_performance', performance_id=performance.id) }}" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="artist_name">Nome Artista</label>
+            <input type="text" class="form-control" id="artist_name" name="artist_name"
+              value="{{ performance.artist_name }}" required>
+          </div>
+          <div class="form-group">
+            <label for="performance_day">Giorno di Performance</label>
+            <select class="form-control" id="performance_day" name="performance_day" required>
+              <option value="">Seleziona un giorno</option>
+              <option value="venerdì" {% if performance.performance_day=='venerdì' %}selected{% endif %}>Venerdì
+              </option>
+              <option value="sabato" {% if performance.performance_day=='sabato' %}selected{% endif %}>Sabato</option>
+              <option value="domenica" {% if performance.performance_day=='domenica' %}selected{% endif %}>Domenica
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="start_time">Orario di Inizio</label>
+            <input type="time" class="form-control" id="start_time" name="start_time"
+              value="{{ performance.start_time }}" required>
+          </div>
+          <div class="form-group">
+            <label for="duration">Durata (minuti)</label>
+            <input type="number" class="form-control" id="duration" name="duration" value="{{ performance.duration }}"
+              min="1" required>
+          </div>
+          <div class="form-group">
+            <label for="description">Descrizione</label>
+            <textarea class="form-control" id="description" name="description" rows="4"
+              required>{{ performance.description }}</textarea>
+          </div>
+          <div class="form-group">
+            <label for="stage">Palco</label>
+            <input type="text" class="form-control" id="stage" name="stage" value="{{ performance.stage }}" required>
+          </div>
+          <div class="form-group">
+            <label for="genre">Genere</label>
+            <input type="text" class="form-control" id="genre" name="genre" value="{{ performance.genre }}" required>
+          </div>
+          <div class="form-group">
+            <label for="image_path">Percorso Immagine</label>
+            <input type="file" class="form-control" id="performance_image" name="performance_image" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Aggiorna Performance</button>
+        </form>
+
+      </main>
+    </article>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center mt-4">
+  <div class="col-md-8">
+    <div class="card shadow-sm">
+      <div class="card-header bg-primary text-white text-center">
+        <h2 class="mb-0">Profilo Utente</h2>
+      </div>
+      <article class="card-body">
+        <p class="card-text"><strong>Email:</strong> {{ user.email }}</p>
+        <p class="card-text"><strong>Ruolo:</strong> {{ user.role }}</p>
+
+        {% if user.role == "partecipante" %}
+        <h4 class="mt-4">Biglietto Acquistato</h4>
+        {% if ticket %}
+        <p class="card-text"><strong>Tipo:</strong> {{ ticket.ticket_type }}</p>
+        <p class="card-text"><strong>Giorni inclusi:</strong> {{ ticket.valid_days }}</p>
+        <p class="card-text"><strong>Codice Biglietto:</strong> {{ ticket.id }}</p>
+        {% else %}
+        <p class="text-muted">Non hai ancora acquistato un biglietto.</p>
+        {% endif %}
+        {% elif user.role == "organizzatore" %}
+        <h4 class="mt-4">Le tue Performance</h4>
+        {% if performances %}
+        <ul class="list-group">
+          {% for performance in performances %}
+          <li class="list-group-item">
+            <a href="{{ url_for('performance_detail', performance_id=performance.id) }}" class="card-link">
+              <strong>{{ performance.artist_name }}</strong> - {{ performance.performance_day }} {{
+              performance.start_time }}
+              {% if performance.published == 1 %}
+              <span class="badge badge-success ml-2">Pubblicata</span>
+              {% else %}
+              <span class="badge badge-secondary ml-2">Non pubblicata</span>
+              {% endif %}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-muted">Non hai ancora aggiunto performance.</p>
+        {% endif %}
+        {% endif %}
+      </article>
+    </div>
+  </div>
+</div>
+{% endblock %}
