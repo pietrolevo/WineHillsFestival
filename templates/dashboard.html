@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="dashboard-container" class="container mt-4">
+
+  <h2 class="text-center mb-4">Dashboard Organizzatore</h2>
+
+  <!-- statistiche biglietti -->
+  <article class="row">
+    <div class="col-md-12">
+      <h4>Partecipanti</h4>
+      <p><strong>Totale:</strong> {{ total_participants }}</p>
+
+      <h4>Vendite Per Giorno</h4>
+      <table class="table table-bordered table-sm">
+        <thead>
+          <tr>
+            <th>Giorno</th>
+            <th>Biglietti Venduti</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Venerdì</td>
+            <td>{{ friday }}</td>
+          </tr>
+          <tr>
+            <td>Sabato</td>
+            <td>{{ saturday }}</td>
+          </tr>
+          <tr>
+            <td>Domenica</td>
+            <td>{{ sunday }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>Vendite Per Tipologia Biglietto</h4>
+      <table class="table table-bordered table-sm">
+        <thead>
+          <tr>
+            <th>Tipo di Biglietto</th>
+            <th>Venduti</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Giornaliero</td>
+            <td>{{ daily_pass }}</td>
+          </tr>
+          <tr>
+            <td>Pass 2 Giorni</td>
+            <td>{{ two_day_pass }}</td>
+          </tr>
+          <tr>
+            <td>Full Pass</td>
+            <td>{{ full_pass }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+
+  <!-- performance -->
+  <article class="row mt-4">
+    <main class="col-md-12">
+      <h4>Gestione Performance</h4>
+      <a href="{{ url_for('add_performance') }}" class="btn btn-primary mb-3">Aggiungi Performance</a>
+
+      {% if performances %}
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Artista</th>
+              <th>Giorno</th>
+              <th>Orario</th>
+              <th>Stato</th>
+              <th>Azioni</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for perf in performances %}
+            <tr>
+              <td>{{ perf.artist_name }}</td>
+              <td>{{ perf.performance_day }}</td>
+              <td>{{ perf.start_time }}</td>
+              <td>
+                {% if perf.published == 1 %}
+                <span class="badge badge-success">Pubblicata</span>
+                {% else %}
+                {% if perf.non_pubblicabile %}
+                <span class="badge badge-danger">Non pubblicabile</span>
+                {% else %}
+                <span class="badge badge-secondary">Bozza</span>
+                {% endif %}
+                {% endif %}
+              </td>
+              <td>
+                <a href="{{ url_for('performance_detail', performance_id=perf.id) }}"
+                  class="btn btn-sm btn-info">Dettagli</a>
+                {% if perf.published != 1 %}
+                {% if not perf.non_pubblicabile %}
+                <a href="{{ url_for('publish_performance_route', performance_id=perf.id) }}"
+                  class="btn btn-sm btn-outline-primary">Pubblica</a>
+                {% endif %}
+                <a href="{{ url_for('edit_performance', performance_id=perf.id) }}"
+                  class="btn btn-sm btn-warning">Modifica</a>
+                <a href="{{ url_for('delete_performance_route', performance_id=perf.id) }}"
+                  class="btn btn-sm btn-danger">Elimina</a>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      {% else %}
+      <p class="text-muted">Non hai ancora inserito performance.</p>
+      {% endif %}
+    </main>
+  </article>
+</div>
+{% endblock %}

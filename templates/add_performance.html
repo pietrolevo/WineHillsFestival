@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center mt-4">
+  <div class="col-md-8">
+    <article class="card shadow-sm">
+      <div class="card-header bg-primary text-white">
+        <h2 class="mb-0">Aggiungi Performance</h2>
+      </div>
+      <div class="card-body">
+        <form method="POST" action="{{ url_for('add_performance') }}" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="artist_name">Nome Artista</label>
+            <input type="text" class="form-control" id="artist_name" name="artist_name"
+              placeholder="Inserisci il nome dell'artista" required>
+          </div>
+          <div class="form-group">
+            <label for="performance_day">Giorno di Performance</label>
+            <select class="form-control" id="performance_day" name="performance_day" required>
+              <option value="">Seleziona un giorno</option>
+              <option value="venerdì">Venerdì</option>
+              <option value="sabato">Sabato</option>
+              <option value="domenica">Domenica</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="start_time">Orario di Inizio</label>
+            <input type="time" class="form-control" id="start_time" name="start_time" required>
+          </div>
+          <div class="form-group">
+            <label for="duration">Durata (minuti)</label>
+            <input type="number" class="form-control" id="duration" name="duration" min="1" required>
+          </div>
+          <div class="form-group">
+            <label for="description">Descrizione</label>
+            <textarea class="form-control" id="description" name="description" rows="4"
+              placeholder="Inserisci una descrizione" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="stage">Palco</label>
+            <input type="text" class="form-control" id="stage" name="stage" placeholder="Inserisci il nome del palco"
+              required>
+          </div>
+          <div class="form-group">
+            <label for="genre">Genere</label>
+            <input type="text" class="form-control" id="genre" name="genre" placeholder="Inserisci il genere musicale"
+              required>
+          </div>
+          <div class="form-group">
+            <label for="image_path">Percorso Immagine</label>
+            <input type="file" class="form-control" id="performance_image" name="performance_image" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Aggiungi Performance</button>
+        </form>
+      </div>
+    </article>
+  </div>
+</div>
+{% endblock %}

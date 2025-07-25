@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 id="about-title" class="text-center mb-4">WineHills – Il Festival Musicale del Monferrato</h2>
+  <div class="card">
+    <div class="about-img-wrapper">
+      <img src="{{ url_for('static', filename='colline.jpg') }}" class="about-img" alt="WineHills - Festival Musicale">
+    </div>
+    <article class="card-body">
+      <h5 class="card-title">Scopri il Festival</h5>
+      <p class="card-text">
+        <strong>📍 Location:</strong> Fontanile<br>
+        <strong>🎶 Durata:</strong> dal 20 al 22 Giugno <br>
+      </p>
+      <p class="card-text">
+        WineHills è un’esperienza immersiva che fonde il fascino della musica dal vivo con l’atmosfera unica delle
+        colline del monferrato.
+        I palchi, posizionati tra vigneti e panorami mozzafiato, ospiteranno artisti di livello nazionale e
+        internazionale, offrendo un programma ricco di spettacoli e performance.
+      </p>
+      <p class="card-text">
+        Accanto ai concerti, il festival propone percorsi enogastronomici dedicati ai vini locali, degustazioni guidate
+        e incontri con produttori che raccontano la storia di un territorio ricco di tradizione e innovazione.
+      </p>
+    </article>
+  </div>
+</div>
+{% endblock %}

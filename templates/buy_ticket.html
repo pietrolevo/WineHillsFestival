@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 id="ticket-title" class="mb-4 text-center">Scegli il tuo biglietto per un'esperienza unica!</h2>
+
+  <article class="row justify-content-center">
+    <!-- Biglietto Giornaliero -->
+    <div class="col-md-4 mb-3">
+      <div class="card ticket-card text-center">
+        <div class="card-body">
+          <h5 class="card-title">Biglietto Giornaliero</h5>
+          <p class="ticket-price">105,99€</p>
+          <form method="POST" action="{{ url_for('buy_ticket') }}">
+            <input type="hidden" name="ticket_type" value="Giornaliero">
+            <div class="form-group">
+              <label class="font-weight-bold" for="day">Seleziona il giorno</label>
+              <select class="form-control" id="day" name="day" required>
+                <option value="venerdì">Venerdì</option>
+                <option value="sabato">Sabato</option>
+                <option value="domenica">Domenica</option>
+              </select>
+            </div>
+            <button id="ticket-btn" type="submit" class="btn btn-primary">Acquista</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pass 2 Giorni -->
+    <div class="col-md-4 mb-3">
+      <div class="card ticket-card text-center">
+        <div class="card-body">
+          <h5 class="card-title">Pass 2 Giorni</h5>
+          <p class="ticket-price">200,99€</p>
+          <form method="POST" action="{{ url_for('buy_ticket') }}">
+            <input type="hidden" name="ticket_type" value="Pass 2 Giorni">
+            <div class="form-group">
+              <label class="font-weight-bold" for="pass2_option">Scegli le date del tuo pass</label>
+              <select class="form-control" id="pass2_option" name="pass2_option" required>
+                <option value="venerdì,sabato">Venerdì e Sabato</option>
+                <option value="sabato,domenica">Sabato e Domenica</option>
+              </select>
+            </div>
+            <button id="ticket-btn" type="submit" class="btn btn-primary">Acquista</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Full Pass -->
+    <div class="col-md-4 mb-3">
+      <div class="card ticket-card text-center">
+        <div class="card-body">
+          <h5 class="card-title">Full Pass</h5>
+          <p class="ticket-price">300,99€</p>
+          <p class="font-weight-bold">20-21-22 Giugno, vivi tutta l'esperienza di WineHills festival!</p>
+          <form method="POST" action="{{ url_for('buy_ticket') }}">
+            <input type="hidden" name="ticket_type" value="Full Pass">
+            <button id="ticket-btn" type="submit" class="btn btn-primary">Acquista</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+{% endblock %}
